@@ -1,0 +1,30 @@
+<html>
+    <head lang="{{.language}}">
+        <title>{{.name}}</title>
+    </head>
+    <body>
+        {{ $id := .id }}
+        <nav>
+            {{ $selectedLanguage := .language }}
+            {{ range $lang := .languages }}
+                {{ if eq $selectedLanguage  $lang }}
+                    <span>{{$lang}}</span>
+                {{ else }}
+                    <a href="./{{ $id }}-{{ $lang }}.html">{{$lang}}</a>
+                {{ end }}
+            {{ end }}
+        </nav>
+        <main>
+            <h1>{{ .name }}</h1>
+            {{ $asset := print $id ".png" }}
+            {{ if HasAsset $asset }}
+                <img src="./assets/{{$asset}}">
+            {{ end }}
+            <ul>
+                {{ range $listItem := List .features }}
+                    <li>{{$listItem}}</li>
+                {{ end }}
+            </ul>
+        </main>
+    </body>
+</html>
